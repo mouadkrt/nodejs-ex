@@ -76,12 +76,15 @@ var initDb = function(callback) {
 app.get('/', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
+    console.log("New rquest on / endpoint");
   if (!db) {
+      console.log("initDb");
     initDb(function(err){});
   }
   if (db) {
     var col = db.collection('counts');
     // Create a document with request IP and current time of request
+      console.log("col.inser() into db");
     col.insert({ip: req.ip, date: Date.now()});
     col.count(function(err, count){
       if (err) {
@@ -97,6 +100,7 @@ app.get('/', function (req, res) {
 app.get('/pagecount', function (req, res) {
   // try to initialize the db on every request if it's not already
   // initialized.
+     console.log("New rquest on / pagecount");
   if (!db) {
     initDb(function(err){});
   }
